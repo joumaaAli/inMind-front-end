@@ -1,0 +1,102 @@
+<div class="wrapper">
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <h1>Register</h1>
+    <div class="input-box">
+      <input
+        type="text"
+        formControlName="firstName"
+        placeholder="First Name"
+        required
+      />
+      <i class="bx bxs-user"></i>
+      <div
+        *ngIf="
+          registrationForm.get('firstName')?.invalid &&
+          registrationForm.get('firstName')?.touched
+        "
+        class="error"
+      >
+        First name is required.
+      </div>
+    </div>
+    <div class="input-box">
+      <input
+        type="text"
+        formControlName="lastName"
+        placeholder="Last Name"
+        required
+      />
+      <i class="bx bxs-user"></i>
+      <div
+        *ngIf="
+          registrationForm.get('lastName')?.invalid &&
+          registrationForm.get('lastName')?.touched
+        "
+        class="error"
+      >
+        Last name is required.
+      </div>
+    </div>
+    <div class="input-box">
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email"
+        required
+      />
+      <i class="bx bx-mail"></i>
+      <div
+        *ngIf="
+          registrationForm.get('email')?.invalid &&
+          registrationForm.get('email')?.touched
+        "
+        class="error"
+      >
+        Email is required.
+      </div>
+    </div>
+    <div class="input-box">
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        required
+      />
+      <i class="bx bxs-lock-alt"></i>
+      <div
+        *ngIf="
+          registrationForm.get('password')?.invalid &&
+          registrationForm.get('password')?.touched
+        "
+        class="error"
+      >
+        Password is required.
+      </div>
+    </div>
+    <div class="input-box">
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirm Password"
+        required
+      />
+      <i class="bx bxs-lock-alt"></i>
+      <div
+        *ngIf="
+          registrationForm.get('confirmPassword')?.invalid &&
+          registrationForm.get('confirmPassword')?.touched
+        "
+        class="error"
+      >
+        Confirm password is required.
+      </div>
+    </div>
+    <button type="submit" class="btn" [disabled]="!registrationForm.valid">
+      Register
+    </button>
+
+    <div class="register-link">
+      <p>Already have an account? <a href="#">Login</a></p>
+    </div>
+  </form>
+</div>
