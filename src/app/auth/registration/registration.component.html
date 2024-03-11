@@ -87,10 +87,18 @@
           registrationForm.get('confirmPassword')?.touched
         "
         class="error"
+        size="small"
       >
         Confirm password is required.
       </div>
     </div>
+    <div
+      class="input-box d-flex justify-content-center align-items-center flex-column"
+    >
+      <input type="checkbox" formControlName="isAdmin" />
+      <label for="isAdmin">Check if Admin</label>
+    </div>
+
     <button type="submit" class="btn" [disabled]="!registrationForm.valid">
       Register
     </button>

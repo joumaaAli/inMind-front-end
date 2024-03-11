@@ -33,11 +33,11 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (response) => {
             this.authService.storeUserSession(response.user);
-            this.router.navigate(['/dashboard']); // Adjust the route as necessary
+            console.log('Login successful', response);
+            this.router.navigate(['/main']); // Adjust the route as necessary
           },
           (error) => {
             console.error('Login failed', error);
-            // Implement additional error handling logic as needed
           }
         );
     }

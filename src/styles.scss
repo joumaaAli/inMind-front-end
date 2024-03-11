@@ -3,18 +3,41 @@
 
 html,
 body {
-  height: 100%;
-}
-body {
   display: flex;
+  height: 100%;
   justify-content: center;
-  align-items: center;
   min-height: 100vh;
-  background: url("https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_1280.jpg");
   background-size: cover;
   background-position: center;
   font-family: "Poppins", sans-serif;
   color: #fff;
   margin: 0;
   padding: 0;
+}
+
+.background-home::before {
+  content: "";
+  position: fixed; /* or absolute */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2018/06/18/23/03/europe-3483539_960_720.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5; /* Adjust opacity here */
+  z-index: -1;
+}
+
+.background-auth::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2013/04/11/19/46/building-102840_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
 }

@@ -29,6 +29,7 @@ export class RegistrationComponent implements OnInit {
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required],
+        isAdmin: [false],
       },
       { validator: this.passwordMatchValidator }
     );
@@ -48,7 +49,12 @@ export class RegistrationComponent implements OnInit {
 
   onSubmit() {
     if (this.registrationForm.valid) {
-      this.authService.registerUser(this.registrationForm.value).subscribe(
+      const formValue = { ...this.registrationForm.value };
+      if (formValue.isAdmin) {
+        formValue.role = 'Admin';
+      }
+      delete formValue.confirmPassword;
+      this.authService.registerUser(formValue).subscribe(
         (response) => {
           console.log('Registration successful', response);
           this.loginUser(
@@ -66,8 +72,8 @@ export class RegistrationComponent implements OnInit {
   private loginUser(username: string, password: string) {
     this.authService.loginUser(username, password).subscribe(
       (response) => {
-        this.authService.storeUserSession(response.user);
-        this.router.navigate(['/dashboard']);
+        this.authService.storeUserSession(response['Login']);
+        this.router.navigate(['/main']);
       },
       (error) => {
         console.error('Login failed', error);

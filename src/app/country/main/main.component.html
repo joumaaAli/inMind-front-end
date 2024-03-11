@@ -1,1 +1,18 @@
-<p>main works!</p>
+<div class="container wrapper">
+  <div class="container mt-5 hero">
+    <div class="row justify-content-center">
+      <div class="col-sm-4" style="text-align: center">
+        <h1>Discover the world</h1>
+        <br />
+      </div>
+    </div>
+  </div>
+  <div class="row countries">
+    <div *ngFor="let country of countries" class="col-lg-4 my-2">
+      <figure>
+        <img src="{{ country.flags.png }}" alt="{{ country.name.common }}" />
+        <figcaption>{{ country.name.common }}</figcaption>
+      </figure>
+    </div>
+  </div>
+</div>

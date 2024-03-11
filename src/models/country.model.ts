@@ -1,0 +1,81 @@
+export class Country {
+  alpha2Code: string;
+  alpha3Code: string;
+  altSpellings: string[];
+  area: number;
+  borders: string[];
+  callingCodes: string[];
+  capital: string[];
+  capitalInfo: { latlng: number[] };
+  car: { signs: string[]; side: string };
+  cioc: string;
+  coatOfArms: { png: string; svg: string };
+  continents: string[];
+  currencies: any;
+  demonym: string;
+  demonyms: any;
+  independent: boolean;
+  fifa: string;
+  flag: string;
+  flags: { png: string; svg: string };
+  gini: any;
+  landlocked: boolean;
+  languages: any;
+  latlng: number[];
+  maps: { googleMaps: string; openStreetMaps: string };
+  name: { official: string; common: string };
+  nativeName: any;
+  numericCode: string;
+  population: number;
+  region: string;
+  regionalBlocs: any;
+  startOfWeek: string;
+  status: string;
+  subregion: string;
+  timezones: string[];
+  topLevelDomain: string[];
+  translations: any;
+  unMember: boolean;
+
+  constructor(data: any) {
+    this.alpha2Code = data.cca2;
+    this.alpha3Code = data.cca3;
+    this.altSpellings = data.altSpellings;
+    this.area = data.area;
+    this.borders = data.borders;
+    this.callingCodes = data.idd.root
+      ? [data.idd.root + (data.idd.suffixes ? data.idd.suffixes[0] : '')]
+      : [];
+    this.capital = data.capital || [];
+    this.capitalInfo = { latlng: data.capitalInfo.latlng || [] };
+    this.car = data.car || { signs: [], side: '' };
+    this.cioc = data.cioc;
+    this.coatOfArms = data.coatOfArms || { png: '', svg: '' };
+    this.continents = data.continents;
+    this.currencies = data.currencies;
+    this.demonym = data.demonym;
+    this.demonyms = data.demonyms;
+    this.independent = data.independent;
+    this.fifa = data.fifa;
+    this.flag = data.flag;
+    this.flags = data.flags || { png: '', svg: '' };
+    this.gini = data.gini;
+    this.landlocked = data.landlocked;
+    this.languages = data.languages;
+    this.latlng = data.latlng;
+    this.maps = data.maps || { googleMaps: '', openStreetMaps: '' };
+    this.name = data.name;
+    this.nativeName = data.nativeName;
+    this.numericCode = data.numericCode;
+    this.population = data.population;
+    this.region = data.region;
+    this.regionalBlocs = data.regionalBlocs;
+    this.startOfWeek = data.startOfWeek;
+    this.status = data.status;
+    this.subregion = data.subregion;
+    this.timezones = data.timezones;
+    this.topLevelDomain = data.tld || [];
+    this.translations = data.translations;
+    this.unMember = data.unMember;
+  }
+}
