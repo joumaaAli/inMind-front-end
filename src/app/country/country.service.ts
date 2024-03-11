@@ -13,12 +13,17 @@ export class CountryService {
 
   getCountries(): Observable<Country[]> {
     return this.http
-      .get<any[]>(this.apiUrl)
+      .get<any[]>(`${this.apiUrl}/all`)
       .pipe(
         map((data: any[]) =>
           data.map((country) => this.formatCountryData(country))
         )
       );
+  }
+
+  getCountryById(id: string): Observable<Country> {
+    const data = this.http.get<any>(`${this.apiUrl}/alpha/${id}`);
+    return data.pipe(map((countries) => this.formatCountryData(countries[0])));
   }
 
   private formatCountryData(data: any): Country {

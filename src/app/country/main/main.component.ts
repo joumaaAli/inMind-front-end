@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../country.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -9,7 +10,7 @@ import { CountryService } from '../country.service';
 export class MainComponent implements OnInit {
   countries: any[] = [];
 
-  constructor(private countryService: CountryService) {}
+  constructor(private countryService: CountryService, private router: Router) {}
 
   ngOnInit(): void {
     this.countryService.getCountries().subscribe((data: any[]) => {
@@ -17,5 +18,8 @@ export class MainComponent implements OnInit {
         (country) => country.name?.common !== 'Israel'
       );
     });
+  }
+  navigateToCountry(countryId: string) {
+    this.router.navigate(['/country', countryId]);
   }
 }

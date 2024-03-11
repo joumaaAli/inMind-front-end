@@ -8,7 +8,11 @@
     </div>
   </div>
   <div class="row countries">
-    <div *ngFor="let country of countries" class="col-lg-4 my-2">
+    <div
+      *ngFor="let country of countries"
+      class="col-lg-4 my-2"
+      (click)="navigateToCountry(country.alpha2Code)"
+    >
       <figure>
         <img src="{{ country.flags.png }}" alt="{{ country.name.common }}" />
         <figcaption>{{ country.name.common }}</figcaption>

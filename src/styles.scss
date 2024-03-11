@@ -41,3 +41,16 @@ body {
   background-position: center;
   z-index: -1;
 }
+
+.background-details::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2015/01/15/16/17/hands-600497_1280.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}

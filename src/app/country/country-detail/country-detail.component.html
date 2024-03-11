@@ -1,1 +1,31 @@
-<p>country-detail works!</p>
+<div class="profile-wrapper">
+  <div class="profile-image">
+    <img src="{{ country?.flags?.png }}" alt="Country Image" />
+  </div>
+  <div class="profile-username">
+    <h1>{{ country?.name?.common }}</h1>
+    <h5>{{country?.capital?.[0]}}</h5>
+  </div>
+  <div class="profile-intro">
+    <!-- <div class="profile-intro-description">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+      Lorem Ipsum has been the industry's standard dummy text ever since the
+      1500's, when an unknown printer took a galley of type.
+    </div> -->
+  </div>
+  <div class="profile-stats">
+    <div class="profile-stat">
+      <span class="profile-stat-title">Population</span>
+      <br />
+      <span class="profile-stat-value">{{ country?.population }}</span>
+    </div>
+    <div class="profile-stat">
+      <span class="profile-stat-title">Area</span>
+      <br />
+      <span class="profile-stat-value">{{ country?.area }}</span>
+    </div>
+  </div>
+  <div class="profile-actions" *ngIf="isAdmin()">
+    <button class="edit-button">Edit</button>
+  </div>
+</div>
