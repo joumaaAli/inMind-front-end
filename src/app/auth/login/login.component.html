@@ -15,7 +15,13 @@
         "
         class="error"
       >
-        Email is required.
+        {{
+          loginForm.get("email")?.hasError("required")
+            ? "Email is required."
+            : loginForm.get("email")?.hasError("email")
+            ? "Email is invalid."
+            : ""
+        }}
       </div>
     </div>
     <div class="input-box">

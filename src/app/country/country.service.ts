@@ -21,6 +21,11 @@ export class CountryService {
       );
   }
 
+  getCountryByName(name: string): Observable<Country> {
+    const data = this.http.get<any>(`${this.apiUrl}/name/${name}`);
+    return data.pipe(map((countries) => this.formatCountryData(countries[0])));
+  }
+
   getCountryById(id: string): Observable<Country> {
     const data = this.http.get<any>(`${this.apiUrl}/alpha/${id}`);
     return data.pipe(map((countries) => this.formatCountryData(countries[0])));

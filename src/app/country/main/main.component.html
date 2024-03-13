@@ -1,22 +1,36 @@
-<div class="container wrapper">
-  <div class="container mt-5 hero">
-    <div class="row justify-content-center">
-      <div class="col-sm-4" style="text-align: center">
-        <h1>Discover the world</h1>
-        <br />
-      </div>
+<div class="hero">
+  <app-navbar></app-navbar>
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+      <h1>Discover the world</h1>
+      <br />
     </div>
   </div>
-  <div class="row countries">
-    <div
-      *ngFor="let country of countries"
-      class="col-lg-4 my-2"
-      (click)="navigateToCountry(country.alpha2Code)"
-    >
-      <figure>
-        <img src="{{ country.flags.png }}" alt="{{ country.name.common }}" />
-        <figcaption>{{ country.name.common }}</figcaption>
-      </figure>
-    </div>
+</div>
+<div class="header">
+  <h1 class="title">Countries</h1>
+  <div class="box">
+    <form name="search">
+      <input
+        type="text"
+        class="input"
+        name="txt"
+        [(ngModel)]="searchQuery"
+        (input)="searchCountries(searchQuery)"
+      />
+    </form>
+    <i class="fas fa-search"></i>
+  </div>
+</div>
+<div class="row countries">
+  <div
+    *ngFor="let country of filteredCountries"
+    class="col-lg-3 my-2"
+    (click)="navigateToCountry(country.alpha2Code)"
+  >
+    <figure>
+      <img src="{{ country.flags.png }}" alt="{{ country.name.common }}" />
+      <figcaption>{{ country.name.common }}</figcaption>
+    </figure>
   </div>
 </div>
