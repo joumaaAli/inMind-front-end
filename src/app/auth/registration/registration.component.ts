@@ -50,13 +50,24 @@ export class RegistrationComponent implements OnInit {
   onSubmit() {
     if (this.registrationForm.valid) {
       const formValue = { ...this.registrationForm.value };
-      if (formValue.isAdmin) {
-        formValue.role = 'Admin';
-      }
       delete formValue.confirmPassword;
+      if (formValue.isAdmin) {
+        formValue.RoleName = 'Admin';
+        this.authService.regiterAdmin(formValue).subscribe(
+          (response) => {
+            this.loginUser(
+              response.username,
+              this.registrationForm.value.password
+            );
+          },
+          (error) => {
+            console.error('Registration failed', error);
+          }
+        );
+        return;
+      }
       this.authService.registerUser(formValue).subscribe(
         (response) => {
-          console.log('Registration successful', response);
           this.loginUser(
             response.username,
             this.registrationForm.value.password

@@ -16,7 +16,7 @@
         class="input"
         name="txt"
         [(ngModel)]="searchQuery"
-        (input)="searchCountries(searchQuery)"
+        (input)="fetchCountries()"
       />
     </form>
     <i class="fas fa-search"></i>
@@ -26,11 +26,11 @@
   <div
     *ngFor="let country of filteredCountries"
     class="col-lg-3 my-2"
-    (click)="navigateToCountry(country.alpha2Code)"
+    (click)="navigateToCountry(country.code)"
   >
     <figure>
-      <img src="{{ country.flags.png }}" alt="{{ country.name.common }}" />
-      <figcaption>{{ country.name.common }}</figcaption>
+      <img src="{{ country.flag }}" alt="{{ country.flag }}" />
+      <figcaption>{{ country.name }}</figcaption>
     </figure>
   </div>
 </div>

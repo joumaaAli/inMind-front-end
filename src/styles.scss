@@ -45,6 +45,11 @@ body {
   z-index: -1;
 }
 
+.background-details {
+  display: flex;
+  justify-content: center;
+}
+
 .background-details::before {
   content: "";
   position: fixed;
@@ -52,8 +57,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("https://cdn.pixabay.com/photo/2015/01/15/16/17/hands-600497_1280.jpg");
+  background-image: url("https://images5.alphacoders.com/353/353018.jpg");
   background-size: cover;
   background-position: center;
   z-index: -1;
+  opacity: 0.9;
+  filter: grayscale(50%);
 }
+
+// https://cdn.pixabay.com/photo/2014/04/02/16/20/world-map-306985_960_720.png

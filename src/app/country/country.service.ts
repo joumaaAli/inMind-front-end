@@ -11,9 +11,9 @@ export class CountryService {
   private apiUrl = environment.countriesUrl;
   constructor(private http: HttpClient) {}
 
-  getCountries(): Observable<Country[]> {
+  getCountries(name: string, region: string): Observable<Country[]> {
     return this.http
-      .get<any[]>(`${this.apiUrl}/all`)
+      .get<any[]>(`${this.apiUrl}/countries?name=${name}&region=${region}`)
       .pipe(
         map((data: any[]) =>
           data.map((country) => this.formatCountryData(country))
@@ -21,14 +21,19 @@ export class CountryService {
       );
   }
 
-  getCountryByName(name: string): Observable<Country> {
-    const data = this.http.get<any>(`${this.apiUrl}/name/${name}`);
-    return data.pipe(map((countries) => this.formatCountryData(countries[0])));
+  getCountryById(code: string): Observable<Country> {
+    const data = this.http.get<any>(`${this.apiUrl}/country?code=${code}`);
+    return data.pipe(map((country) => this.formatCountryData(country)));
   }
 
-  getCountryById(id: string): Observable<Country> {
-    const data = this.http.get<any>(`${this.apiUrl}/alpha/${id}`);
-    return data.pipe(map((countries) => this.formatCountryData(countries[0])));
+  editCountry(country: Country): Observable<Country> {
+    return this.http
+      .put<any>(`${this.apiUrl}/countries/${country?.code}`, country)
+      .pipe(map((country) => this.formatCountryData(country)));
+  }
+
+  uploadImages(code: number, flag: FormData): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/countries/${code}/images`, flag);
   }
 
   private formatCountryData(data: any): Country {

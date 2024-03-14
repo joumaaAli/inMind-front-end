@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service'; // Update the path as needed
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -32,9 +33,14 @@ export class LoginComponent implements OnInit {
         .loginUser(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe(
           (response) => {
-            this.authService.storeUserSession(response.user);
-            console.log('Login successful', response);
-            this.router.navigate(['/main']); // Adjust the route as necessary
+            this.authService.storeUserSession(response['Login']);
+            this.router.navigate(['/main']).then(() => {
+              Swal.fire({
+                title: 'Success!',
+                text: 'You have successfully logged in.',
+                icon: 'success',
+              });
+            });
           },
           (error) => {
             console.error('Login failed', error);

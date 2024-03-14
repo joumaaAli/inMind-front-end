@@ -130,6 +130,9 @@ figure:hover img {
   animation: myAnim 10s ease 0s 1 normal forwards;
   width: 100%;
   height: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .hero h1 {

@@ -5,11 +5,11 @@ import { MainComponent } from './main/main.component';
 import { CountryDetailComponent } from './country-detail/country-detail.component';
 import { CountryService } from './country.service';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [MainComponent, CountryDetailComponent, NavbarComponent],
-  imports: [CommonModule, HttpClientModule, FormsModule],
+  imports: [CommonModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [CountryService],
   exports: [NavbarComponent],
 })

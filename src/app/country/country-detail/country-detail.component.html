@@ -1,31 +1,114 @@
-<div class="profile-wrapper">
-  <div class="profile-image">
-    <img src="{{ country?.flags?.png }}" alt="Country Image" />
-  </div>
-  <div class="profile-username">
-    <h1>{{ country?.name?.common }}</h1>
-    <h5>{{country?.capital?.[0]}}</h5>
-  </div>
-  <div class="profile-intro">
-    <!-- <div class="profile-intro-description">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-      Lorem Ipsum has been the industry's standard dummy text ever since the
-      1500's, when an unknown printer took a galley of type.
-    </div> -->
-  </div>
-  <div class="profile-stats">
-    <div class="profile-stat">
-      <span class="profile-stat-title">Population</span>
-      <br />
-      <span class="profile-stat-value">{{ country?.population }}</span>
+<app-navbar></app-navbar>
+
+<div
+  class="d-flex justify-content-center align-items-center flex-column wrapper"
+>
+  <div class="header">
+    <div class="text">
+      <div class="name">{{ country?.name }}</div>
+      <div class="description">
+        <ul>
+          <li>
+            <span>Capital:</span>
+            <span>{{ country?.capital }}</span>
+          </li>
+          <li>
+            <span>Population:</span>
+            <span>{{ country?.population }}</span>
+          </li>
+          <li>
+            <span>Region:</span>
+            <span>{{ country?.region }}</span>
+          </li>
+          <li>
+            <span>Area:</span>
+            <span>{{ country?.area }}</span>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="profile-stat">
-      <span class="profile-stat-title">Area</span>
-      <br />
-      <span class="profile-stat-value">{{ country?.area }}</span>
+    <img [src]="country?.flag" alt="" />
+  </div>
+  <div class="container">
+    <div class="slide">
+      <div
+        *ngFor="let imageUrl of country?.images"
+        class="item"
+        [style.backgroundImage]="'url(' + imageUrl + ')'"
+      ></div>
+    </div>
+
+    <div class="button" *ngIf="country && country.images?.length">
+      <button class="prev" (click)="movePrev()">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <button class="next" (click)="moveNext()">
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
     </div>
   </div>
-  <div class="profile-actions" *ngIf="isAdmin()">
-    <button class="edit-button">Edit</button>
+</div>
+<div class="form-container" *ngIf="isAdmin()">
+  <div class="cta-form">
+    <h2 style="color: white">Fill out the form!</h2>
   </div>
+  <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" class="form">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <input
+          type="text"
+          placeholder="Name"
+          class="form__input"
+          formControlName="name"
+        />
+        <label for="name" class="form__label">Name</label>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <input
+          type="text"
+          placeholder="Capital"
+          class="form__input"
+          formControlName="capital"
+        />
+        <label for="capital" class="form__label">Capital</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <input
+          type="number"
+          placeholder="Population"
+          class="form__input"
+          formControlName="population"
+        />
+        <label for="population" class="form__label">Population</label>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <input
+          type="number"
+          placeholder="Area"
+          class="form__input"
+          formControlName="area"
+        />
+        <label for="area" class="form__label">Area</label>
+      </div>
+    </div>
+    <div class="w-100 my-4 d-flex justify-content-center">
+      <button type="submit" [disabled]="!countryForm.valid" class="form_button">
+        Submit
+      </button>
+    </div>
+  </form>
+
+  <label for="images" class="drop-container" id="dropcontainer">
+    <span class="drop-title">Drop files here</span>
+    or
+    <input
+      type="file"
+      id="images"
+      accept="image/*"
+      (change)="onFileSelected($event)"
+    />
+  </label>
+  <button (click)="uploadFile()" class="form_button">Upload Image</button>
 </div>

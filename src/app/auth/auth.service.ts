@@ -17,6 +17,10 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/User/SignUp()`, userData);
   }
 
+  regiterAdmin(userData: User): Observable<any> {
+    return this.http.post(`${this.apiUrl}/User/CreateAdminUser()`, userData);
+  }
+
   loginUser(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/User/Login()`, {
       username,
@@ -39,8 +43,9 @@ export class AuthService {
 
   isAdmin(): boolean {
     const user = this.getUserData();
-    console.log(user);
-    return user && user.role === 'Admin';
+    const token = user ? user.AccessToken : null;
+    const roles = this.decodeToken(token)?.realm_access?.roles;
+    return roles?.includes('Admin');
   }
 
   decodeToken(token: string): any {

@@ -16,6 +16,7 @@ import { CountryModule } from './country/country.module';
     CountryModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   bootstrap: [AppComponent],
 })
