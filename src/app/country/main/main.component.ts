@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { CountryService } from '../country.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
@@ -17,7 +17,7 @@ export class MainComponent implements OnInit {
   constructor(
     private countryService: CountryService,
     private router: Router,
-    authService: AuthService
+    private elRef: ElementRef
   ) {}
 
   ngOnInit(): void {
@@ -48,5 +48,44 @@ export class MainComponent implements OnInit {
   navigateToCountry(countryId: string) {
     console.log('countryId', countryId);
     this.router.navigate(['/country', countryId]);
+  }
+
+  toggleActive(): void {
+    const optionMenu = this.elRef.nativeElement.querySelector('.select-menu');
+    optionMenu.classList.toggle('active');
+  }
+
+  selectOption(event: any): void {
+    const selectedOption = event.target
+      .closest('.option')
+      .querySelector('.option-text').innerText;
+    this.region = selectedOption;
+    const sBtnText = this.elRef.nativeElement.querySelector('.sBtn-text');
+    sBtnText.innerText = selectedOption;
+    const optionMenu = this.elRef.nativeElement.querySelector('.select-menu');
+    optionMenu.classList.remove('active');
+    this.countryService
+      .getCountries(this.searchQuery, selectedOption)
+      .subscribe((data: any[]) => {
+        this.countries = data.filter((country) => country?.name !== 'Israel');
+        this.filteredCountries = [...this.countries];
+      });
+  }
+
+  removeOption(event: any): void {
+    this.region = '';
+    const selectedOption = event.target
+      .closest('.option')
+      .querySelector('.option-text').innerText;
+    const sBtnText = this.elRef.nativeElement.querySelector('.sBtn-text');
+    sBtnText.innerText = selectedOption;
+    const optionMenu = this.elRef.nativeElement.querySelector('.select-menu');
+    this.countryService
+      .getCountries(this.searchQuery, this.region)
+      .subscribe((data: any[]) => {
+        this.countries = data.filter((country) => country?.name !== 'Israel');
+        this.filteredCountries = [...this.countries];
+      });
+    optionMenu.classList.remove('active');
   }
 }

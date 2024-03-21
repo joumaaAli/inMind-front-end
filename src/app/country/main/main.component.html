@@ -8,18 +8,46 @@
   </div>
 </div>
 <div class="header">
-  <h1 class="title">Countries</h1>
-  <div class="box">
-    <form name="search">
-      <input
-        type="text"
-        class="input"
-        name="txt"
-        [(ngModel)]="searchQuery"
-        (input)="fetchCountries()"
-      />
-    </form>
-    <i class="fas fa-search"></i>
+  <div class="d-flex justify-content-center align-items-center gap-2">
+    <h1 class="title">Countries</h1>
+    <div class="box">
+      <form name="search">
+        <input
+          type="text"
+          class="input"
+          name="txt"
+          [(ngModel)]="searchQuery"
+          (input)="fetchCountries()"
+        />
+      </form>
+      <i class="fas fa-search"></i>
+    </div>
+  </div>
+  <div class="select-menu">
+    <div class="select-btn" (click)="toggleActive()">
+      <span class="sBtn-text">Select your option</span>
+      <i class="fas fa-chevron-down"></i>
+    </div>
+    <ul class="options">
+      <li class="option" (click)="selectOption($event)">
+        <span class="option-text">Africa</span>
+      </li>
+      <li class="option" (click)="selectOption($event)">
+        <span class="option-text">Europe</span>
+      </li>
+      <li class="option" (click)="selectOption($event)">
+        <span class="option-text">Americas</span>
+      </li>
+      <li class="option" (click)="selectOption($event)">
+        <span class="option-text">Asia</span>
+      </li>
+      <li class="option" (click)="selectOption($event)">
+        <span class="option-text">Oceania</span>
+      </li>
+      <li class="option" (click)="removeOption($event)">
+        <span class="option-text">All</span>
+      </li>
+    </ul>
   </div>
 </div>
 <div class="row countries">
