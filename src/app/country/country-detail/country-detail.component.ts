@@ -74,7 +74,6 @@ export class CountryDetailComponent {
   }
 
   isAdmin() {
-    // return true;
     return this.authService.isAdmin();
   }
 
